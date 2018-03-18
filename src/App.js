@@ -24,6 +24,10 @@ class App extends Component {
     }
   }
 
+  logIn = (loginParams) => {
+
+  }
+
   render() {
     return (
       <div className="App">
