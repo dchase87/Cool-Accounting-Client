@@ -1,8 +1,29 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import AuthAdapter from './adapters/AuthAdapter'
 
 class App extends Component {
+  state = {
+    auth: {
+      isLoggedIn: false,
+      user: {}
+    }
+  }
+
+  componentWillMount = () => {
+    this.checkAuth()
+  }
+
+  checkAuth = () => {
+    if (localStorage.getItem('jwt')) {
+      AuthAdapter.currentUser()
+        .then(user => !user.error ? this.setUser(user) : this.logOut())
+    } else {
+      this.logOut()
+    }
+  }
+
   render() {
     return (
       <div className="App">
