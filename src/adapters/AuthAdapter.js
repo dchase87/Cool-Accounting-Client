@@ -11,15 +11,11 @@ export default class AuthAdapter {
 
   static currentUser = () => {
     return fetch(`${baseUrl}me`, {
-      
-    })
-  }
-}
-
-function headers () {
-  return {
-    'content-type': 'application/json',
-    'accept': 'application/json',
-    'Authorization': ''
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+        'Authorization': localStorage.getItem('jwt')
+      }
+    }).then(resp => resp.json())
   }
 }
